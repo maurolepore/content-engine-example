@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONTENT ENGINE — run readout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="brand__sig">◆</span>
+    <span class="brand__name">CONTENT&nbsp;ENGINE</span>
+    <span class="brand__sub">RUN&nbsp;READOUT</span>
+  </div>
+  <div class="header-right">
+    <span id="timestamp" class="timestamp">—</span>
+    <button id="refresh" class="refresh">↻ REFRESH</button>
+  </div>
+</header>
+
+<main id="main">
+  <div id="empty" class="empty hidden">NO RUNS FOUND IN /output</div>
+
+  <section class="block" id="topics-block">
+    <div class="block-head">
+      <span class="block-label">01</span>
+      <h2 class="block-title">TOPIC&nbsp;RANK</h2>
+      <span class="block-meta" id="topics-meta"></span>
+    </div>
+    <ol id="topics" class="topics"></ol>
+  </section>
+
+  <section class="block" id="hooks-block">
+    <div class="block-head">
+      <span class="block-label">02</span>
+      <h2 class="block-title">HOOK&nbsp;OPTIONS</h2>
+    </div>
+    <div id="hooks" class="hooks"></div>
+  </section>
+
+  <section class="block" id="script-block">
+    <div class="block-head">
+      <span class="block-label">03</span>
+      <h2 class="block-title">SCRIPT</h2>
+      <span class="block-meta" id="script-meta"></span>
+    </div>
+    <div id="script" class="script"></div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

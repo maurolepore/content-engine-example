@@ -2,7 +2,7 @@ PROMPT 1 — Kickoff
 I want to build an autonomous content agent called Content Engine. It should:
 1. Read my personal knowledge base from a /knowledge folder (voice-rules.md,
    about-me-file.md, audience.md, sample-scripts.md)
-2. Search the web for trending topics in the AI/automation/entrepreneurship space
+2. Search the web for trending topics in the space of AI/automation/entrepreneurship.
 3. Score each topic against a rubric: relevance to my audience (using
    audience.md), timeliness, and how saturated the angle already is —
    output a 1-10 score with a one-line reason for each

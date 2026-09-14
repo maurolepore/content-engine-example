@@ -1,27 +1,20 @@
-# Content engine
+# [Content Engine](https://youtu.be/QRXJ-9yPb0w?si=_OIkIXQxCbS2udmp) from [@Maxjohnscn](https://www.youtube.com/@Maxjohnscn/videos)'s [demo](https://www.youtube.com/watch?v=QRXJ-9yPb0w) ([guide](https://drive.google.com/file/d/1b-Sch9iZNhscDapJ69tEs06Tc7Xt896b/view))
+https://www.linkedin.com/in/max-johnson-briix/
 
-## Example
+Pipeline:
+- Research (web search via Google News RSS + topic synthesis).
+- Score (by relevance / timeliness / angle freshness).
+- Write hooks and scripts.
 
-- [Demo](https://youtu.be/QRXJ-9yPb0w?si=yyiC0rOawaeSRx4I)
-- [Guide](https://drive.google.com/file/d/1b-Sch9iZNhscDapJ69tEs06Tc7Xt896b/view)
+Run the pipeline with:
+```python
+python3 -m src.run
+```
 
-## Usage
+See the results at http://localhost:8080
 
-The pipeline lives in `src/`, one module per stage. Zero dependencies
-(stdlib only); needs `GROQ_API_KEY` in the environment.
+------
 
-- Research (web search via Google News RSS + topic synthesis):
-  `python3 -m src.research`
-- Scoring (rubric: relevance / timeliness / angle freshness, vs `audience.md`):
-  `python3 -m src.score`
-- Writing (3 hooks per topic vs `voice-rules.md`, each expanded into its own
-  script vs `sample-scrtipts-file.md` — 15 scripts per run): `python3 -m src.write`
-- Full pipeline (everything above, one timestamped JSON into `/output`):
-  `python3 -m src.run`
-- Dashboard (displays latest `/output` file at http://localhost:8080):
-  `python3 -m src.dashboard`
+I built everything in about 1h with [OpenCode](https://opencode.ai/) and Kimi K3 as the manager agent, using Max's prompts verbatim (except for an additional fix commit: `ffa042b`). I used my OpenCode Go subscription and spent ~100K tokens and USD 2.4.
 
-Each run prints a compact leaderboard plus the winning topic and chosen hook.
-The dashboard is display-only — Refresh re-reads `/output`, it never triggers
-the pipeline.
-
+Each run of the pipeline uses `openai/gpt-oss-120b` using my [`GROQ_API_KEY`](https://console.groq.com/keys) (free tier).

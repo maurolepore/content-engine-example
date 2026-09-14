@@ -15,6 +15,6 @@ See the results at http://localhost:8080
 
 ------
 
-I built everything in about 1h with [OpenCode](https://opencode.ai/) and Kimi K3 as the manager agent, using Max's prompts verbatim (except for an additional fix commit: `ffa042b`). I used my OpenCode Go subscription and spent ~100K tokens and USD 2.4.
+I built everything in about 1h with [OpenCode](https://opencode.ai/) and Kimi K3 as the manager agent, using Max's prompts verbatim (except for an additional fix commit: `ffa042b`). I used my [OpenCode Go](https://opencode.ai/go) subscription and spent ~100K tokens and USD 2.4.
 
 Each run of the pipeline uses `openai/gpt-oss-120b` using my [`GROQ_API_KEY`](https://console.groq.com/keys) (free tier).

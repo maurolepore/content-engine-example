@@ -13,6 +13,10 @@ python3 -m src.run
 
 See the results at http://localhost:8080
 
+<img width="1482" height="867" alt="Image" src="https://github.com/user-attachments/assets/e33c9159-66d4-4a43-aaaf-815b400393a1" />
+
+<img width="1482" height="598" alt="Image" src="https://github.com/user-attachments/assets/a551b48e-8beb-4d76-84b3-da9c86ef1496" />
+
 ------
 
 I built everything in about 1h with [OpenCode](https://opencode.ai/) and Kimi K3 as the manager agent, using Max's prompts verbatim (except for an additional fix commit: `ffa042b`). I used my [OpenCode Go](https://opencode.ai/go) subscription and spent ~100K tokens and USD 2.4.

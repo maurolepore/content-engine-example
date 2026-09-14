@@ -14,4 +14,5 @@ QUERIES = [
 ]
 
 # How many candidate topics the research step returns per run.
-TOPIC_COUNT = 8
+# Three hooks and three scripts are expanded for every topic.
+TOPIC_COUNT = 5

@@ -32,14 +32,14 @@ def chat(messages, model=None, temperature=0.3):
         },
         method="POST",
     )
-    for attempt in range(3):
+    for attempt in range(8):
         try:
             with urllib.request.urlopen(req, timeout=180) as resp:
                 data = json.load(resp)
                 return data["choices"][0]["message"]["content"]
         except urllib.error.HTTPError as e:
             body = e.read().decode()
-            if e.code == 429 and attempt < 2:
-                time.sleep(5 * (attempt + 1))
+            if e.code == 429 and attempt < 7:
+                time.sleep(10 * (attempt + 1))
                 continue
             sys.exit(f"Groq API error {e.code}: {body}")

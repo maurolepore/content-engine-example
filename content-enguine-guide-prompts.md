@@ -22,17 +22,19 @@ against knowledge/audience.md and show me the raw scored output for a real
 topic search before we move on — I want to see the actual scores and
 reasoning, not a mocked example.
 
-PROMPT 3 — Hooks + script
-Now build the hook and script generation step. Take the top-scored topic
-from the last run, generate 3 hook options in my voice using
-knowledge/voice-rules.md, then expand the strongest one into a full script
+PROMPT 3 — Hooks + scripts (15 per run)
+Now build the hook and script generation step. For EVERY scored topic
+— not just the top one — generate 3 hook options in my voice using
+knowledge/voice-rules.md, then expand EACH hook into its own full script
 using knowledge/sample-scripts.md as the pattern for structure and pacing.
-Save all of it into the same run's JSON output.
+That means 3 hooks and 3 full scripts per topic (15 scripts per run for
+5 topics), nested per-topic in the same run's JSON output.
 
 PROMPT 4 — Wire it into one command
 Wire research, scoring, hook writing, and script writing into a single
 command that runs the whole pipeline end to end with no manual steps in
-between, and writes one clean JSON file to /output when it's done.
+between, and writes one clean JSON file to /output when it's done —
+carrying every topic's 3 hooks and 3 scripts (15 scripts total).
 
 PROMPT 5 — The dashboard
 Build a local dashboard that reads the latest JSON file from /output and
@@ -50,10 +52,13 @@ Structure:
   file from /output — this dashboard only displays results, it doesn't
   trigger the pipeline itself (that happens separately, from the terminal)
 - A ranked list of the researched topics with scores shown as bars/meters,
-  the winning topic visually distinct from the rest
-- The 3 hook options for the winning topic, shown as selectable cards
-- The full script, clearly laid out, with its structure (hook / problem /
-  mechanism / proof / CTA) visually separated into sections
+  the winning topic visually distinct from the rest — clicking a topic
+  selects it and shows its hooks
+- The 3 hook options for the selected topic, shown as selectable cards —
+  clicking a hook swaps the script to that hook's version, no re-run
+- The full script for the selected hook, clearly laid out, with its
+  structure (hook / problem / mechanism / proof / CTA) visually separated
+  into sections
 - A subtle staggered load-in animation when new data appears — no
   spinners, no loading skeletons
 

@@ -25,11 +25,13 @@ def main():
 
     scored = result["scored_topics"]
     top = scored[0]
+    scripts_total = sum(len(t["scripts"]) for t in scored)
     print(f"\n{len(result['results'])} sources scanned, {len(scored)} topics scored\n")
     for t in scored:
-        print(f"  {t['overall']:<4} {t['topic']}")
+        print(f"  {t['overall']:<4} {t['topic']} ({len(t['hooks'])} hooks, {len(t['scripts'])} scripts)")
     print(f"\nWinning topic: {top['topic']}")
-    print(f"Chosen hook:   {result['strongest_hook']}")
+    print(f"Strongest hook: {top['strongest']}")
+    print(f"{scripts_total} scripts across {len(scored)} topics")
     print(f"\nSaved → {path}")
 
 

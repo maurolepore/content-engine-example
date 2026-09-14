@@ -14,8 +14,8 @@ The pipeline lives in `src/`, one module per stage. Zero dependencies
   `python3 -m src.research`
 - Scoring (rubric: relevance / timeliness / angle freshness, vs `audience.md`):
   `python3 -m src.score`
-- Writing (3 hooks vs `voice-rules.md`, script vs `sample-scrtipts-file.md`,
-  from the top-scored topic): `python3 -m src.write`
+- Writing (3 hooks per topic vs `voice-rules.md`, each expanded into its own
+  script vs `sample-scrtipts-file.md` — 15 scripts per run): `python3 -m src.write`
 - Full pipeline (everything above, one timestamped JSON into `/output`):
   `python3 -m src.run`
 - Dashboard (displays latest `/output` file at http://localhost:8080):

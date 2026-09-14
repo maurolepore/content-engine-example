@@ -112,11 +112,17 @@ main { max-width: 1120px; margin: 0 auto; padding: 26px 32px 72px; }
   font-family: var(--font-display); font-size: 14px; font-weight: 700;
   color: var(--ink);
 }
+.topic { cursor: pointer; }
 .topic--winner {
   border: 1px solid var(--border-bright);
   background: var(--accent-soft);
   padding: 13px 14px; margin: 4px -14px;
 }
+.topic.selected {
+  border: 1px solid var(--border-bright);
+  padding: 13px 14px; margin: 4px -14px;
+}
+.topic.selected .topic__idx { color: var(--accent); }
 .topic--winner .topic__idx { color: var(--accent); }
 .topic--winner .meter__score { color: var(--accent); }
 .tag {

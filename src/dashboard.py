@@ -18,11 +18,12 @@ MIME = {".html": "text/html", ".css": "text/css", ".js": "text/javascript"}
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/api/latest":
+        path = self.path.split("?")[0]  # ignore cache-busting query strings
+        if path == "/api/latest":
             return self._send_latest()
-        if self.path == "/":
+        if path == "/":
             return self._serve("index.html")
-        rel = self.path.lstrip("/")
+        rel = path.lstrip("/")
         if rel in ("style.css", "app.js"):
             return self._serve(rel)
         self.send_error(404)
@@ -36,6 +37,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-Type", MIME.get(file.suffix, "text/plain"))
         self.send_header("Content-Length", str(len(content)))
+        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(content)
 
@@ -52,6 +54,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
 

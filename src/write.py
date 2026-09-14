@@ -1,13 +1,16 @@
-"""Stage 3 of the pipeline: hooks in the creator's voice, then a full script.
+"""Stage 3 of the pipeline: hooks + script for every scored topic.
 
-- hooks(): 3 hook options for the top topic, judged against knowledge/voice-rules.md
-- script(): expands the strongest hook using knowledge/sample-scrtipts-file.md
-  as the structure/pacing pattern
+Each of the TOPIC_COUNT topics gets 3 hook options (voice-rules.md)
+and 3 expanded scripts (sample-scrtipts-file.md pattern) — one per
+hook. The dashboard lets you click a topic, then click any hook to
+swap that topic's script.
 
-Run `python3 -m src.write` for the full research + scoring + writing output.
+`python3 -m src.write` returns the full scored-topics payload.
+`python3 -m src.run` stamps and saves it to /output.
 """
 
 import json
+import time
 
 from . import knowledge, llm, score
 
@@ -41,7 +44,7 @@ HOOK / PROBLEM / MECHANISM / PROOF / CTA
 Return ONLY the JSON array. No markdown fences, no commentary."""
 
 
-def hooks(topic, kb):
+def _hooks_for(topic, kb):
     raw = llm.chat(
         [
             {
@@ -57,13 +60,10 @@ def hooks(topic, kb):
     out = _parse(raw)
     if not out or "hooks" not in out:
         raise ValueError(f"model did not return hooks JSON:\n{raw}")
-    return {
-        "options": out["hooks"],
-        "strongest": out["hooks"][out["strongest_index"]],
-    }
+    return {"options": out["hooks"], "strongest": out["hooks"][out["strongest_index"]]}
 
 
-def script(topic, hook, kb):
+def _script_for(topic, hook, kb):
     raw = llm.chat(
         [
             {
@@ -110,14 +110,18 @@ def _parse(text):
 
 
 def run():
-    """Stages 1-3 end to end: research, score, hooks, script."""
+    """Stages 1-3 end to end: research, score, hooks + scripts for every topic."""
     kb = knowledge.load_all()
     out = score.run()
-    top = out["scored_topics"][0]
-    hook_out = hooks(top, kb)
-    out["hooks"] = hook_out["options"]
-    out["strongest_hook"] = hook_out["strongest"]
-    out["script"] = script(top, hook_out["strongest"], kb)
+    for t in out["scored_topics"]:
+        hook_out = _hooks_for(t, kb)
+        t["hooks"] = hook_out["options"]
+        t["strongest"] = hook_out["strongest"]
+        time.sleep(4)
+        t["scripts"] = []
+        for h in t["hooks"]:
+            t["scripts"].append(_script_for(t, h, kb))
+            time.sleep(4)
     return out
 
 
